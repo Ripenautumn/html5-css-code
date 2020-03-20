@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width:620px;
+            height: 50px;
+            margin: auto;
+            margin-top: 10px;
+            border:1px solid #ccc;
+            list-style: none;
+            padding-inline-start: 10px;
+            /* display: inline-block; */
+        }
+        li{
+            margin-top: 10px;
+            padding-right: 5px;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+        .choose{
+            margin-top: 5px;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+        }
+        .note{
+            opacity: 0;
+            width: 20px;
+            text-align: center;
+            font-size: 8px;
+            border:1px solid;
+            position: relative;
+            top:24px;
+            left: 15px;
+        }
+        #content{
+            width: 600px;
+            margin: auto;
+            margin-top: 10px;
+            font-size: 16px;
+            height: 48px;
+            background-color: rgb(187, 186, 183);
+        }
+    </style>
+</head>
+<body>
+    <fieldset style="width:640px">
+        <legend style="color:red;font-size: 20px;font-weight: bolder;">网页换肤</legend>
+        <ul id="box">
+            <li>
+                <div class="choose" style="background-color: rgb(187, 186, 183);"></div>
+                <div class="note">灰色</div>
+            </li>
+            <li>
+                <div class="choose" style="background-color: rgb(182, 122, 231);"></div>
+                <div class="note">紫色</div>
+            </li>
+            <li>
+                <div class="choose" style="background-color: rgb(247, 192, 237);"></div>
+                <div class="note">粉色</div>
+            </li>
+            <li>
+                <div class="choose" style="background-color: rgb(140, 228, 240);"></div>
+                <div class="note">蓝色</div>
+            </li>
+            <li>
+                <div class="choose" style="background-color: rgb(247, 243, 25);"></div>
+                <div class="note">黄色</div>
+            </li>
+            <li>
+                <div class="choose" style="background-color: rgb(69, 252, 14);"></div>
+                <div class="note">绿色</div>
+            </li>
+        </ul>
+        <div id="content">LocalStorage将数据保存在客户端本地的硬件设备中，即使浏览器被关闭了，该数据仍然存在，下次打开浏览器访问网站时仍然可以继续使用。</div>
+    </fieldset>
+</body>
+<script type="text/javascript">
+    var lilist = document.getElementsByClassName("choose");
+    var content = document.getElementById("content");
+    var note = document.getElementsByClassName("note");
+    window.onload=function(){
+        content.style.backgroundColor = localStorage.getItem("key")
+    }
+    for (var i = 0; i < lilist.length;i++){
+        lilist[i].index=i;
+        lilist[i].onclick=function(){
+            var value = this.style.backgroundColor;
+            content.style.backgroundColor=this.style.backgroundColor;
+            localStorage.setItem("key",value);
+        }
+        lilist[i].onmouseover = function(){
+            this.style.marginTop=-5+"px";
+            note[this.index].style.opacity=100;
+            note[this.index].style.color=this.style.backgroundColor;
+            note[this.index].style.border.color=this.style.backgroundColor;
+
+        }
+        lilist[i].onmouseout = function(){
+            this.style.marginTop=5+"px";
+            note[this.index].style.opacity=0;
+        }
+    }
+</script>
+</html>
