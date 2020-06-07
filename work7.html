@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        .box{
+            width: 590px;
+            height: 470px;
+            margin: 10px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .slider{
+            width: 4720px;
+            position: absolute;
+        }
+        .slide{
+            width: 590px;
+            height: 470px;
+            overflow: hidden;
+            float: left;
+        }
+        img{
+            width: 590px;
+            height: 470px;
+        }
+        .box>span{
+            display: block;
+            cursor: pointer;
+            top: 200px;
+            line-height: 50px;
+            background: rgb(5, 5, 5);
+            font-size: 20px;
+            position: absolute;
+            color: white;
+            opacity: 0.2;
+        }
+        #left{
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            left: 0px;
+            font-weight: bolder;
+            border-radius: 0 100% 100% 0;
+        }
+        #right{
+            font-weight: bolder;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            right: 0px;
+            border-radius: 100% 0 0 100%;
+        }
+        .nav{
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+        .nav>li{
+            float: left;
+            width: 10px;
+            height: 10px;
+            background: rgba(200, 200, 200, 0.5);
+            cursor: pointer;
+            margin: 0 5px;
+            border-radius: 50%;
+            text-align: center;
+        }
+        .active{
+            background:white;
+            border:5px solid rgba(200,200,200);
+            opacity: 0.8;
+            transform:translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <ul class="slider" id="slider">            
+            <li class="slide"><img src="images/1.png" alt=""></li>
+            <li class="slide"><img src="images/2.png" alt=""></li>
+            <li class="slide"><img src="images/3.png" alt=""></li>
+            <li class="slide"><img src="images/4.png" alt=""></li>
+            <li class="slide"><img src="images/5.png" alt=""></li>
+            <li class="slide"><img src="images/6.png" alt=""></li>
+            <li class="slide"><img src="images/7.png" alt=""></li>
+            <li class="slide"><img src="images/8.png" alt=""></li>           
+        </ul>
+        <span id="left"><</span>
+        <span id="right">></span>
+        <ul class="nav" id="nav">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>   
+    </div>
+</body>
+<script src="js/jQuery.js"></script>
+<script>
+    var index = 0;
+    var timer = setInterval(next,3000);
+    //轮播
+    function move(index){
+        $("#slider").css("left",-590*index);
+        $("#nav li").css("background","#ccc");
+        $("#nav li").css("border","0px");
+        $("#nav li").css("transform","translateY(0px)");
+        $("#nav li").eq(index).css("background","white");
+        $("#nav li").eq(index).css("border","5px solid rgba(200,200,200)");
+        $("#nav li").eq(index).css("opacity","0.8");
+        $("#nav li").eq(index).css("transform","translateY(-5px)");
+    }
+    function next(){
+        if(index==7){
+            index=0;
+        }else{
+            index++;
+        }
+        move(index);
+    }
+    //左右箭头
+    $("#left").mouseover(function (){
+        $(this).css("opacity",0.5);
+    }).mouseout(function (){
+        $(this).css("opacity",0.2);
+    })
+
+    $("#right").mouseover(function (){
+        $(this).css("opacity",0.5);
+    }).mouseout(function (){
+        $(this).css("opacity",0.2);
+    })
+
+    $("#left").click(function(){
+        clearInterval(timer);
+        if(index==0){
+            index=7;
+        }
+        else{
+            index=index-1;
+        }
+        move(index);
+        timer = setInterval(next,3000);
+    })
+    $("#right").click(function(){
+        clearInterval(timer);
+        if(index==7){
+            index=0;
+        }
+        else{
+            index=index+1;
+        }
+        move(index);
+        timer = setInterval(next,3000);
+    })
+
+    //导航
+    $("#nav li").mouseover(function(){
+        index=$(this).index();
+        clearInterval(timer);
+        move(index);
+    });
+    $("#nav li").mouseout(function(){
+        timer=setInterval(next,3000);
+    }); 
+</script>
+</html>
