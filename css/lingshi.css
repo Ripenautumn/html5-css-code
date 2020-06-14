@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+ul{
+    list-style: none;
+}
+@media only screen and (min-width: 768px) {
+    .nav_pc{
+        background-color: black;
+    }
+    .nav_pc ul{
+        list-style: none;
+        color: white;
+        height: 45px;
+        width: 100%;
+        margin: auto;
+        line-height: 45px;
+        padding-right: 50px;
+    }
+    .nav_pc li{
+        float: right;
+        padding-left: 20px;
+    }
+    .nav_pc li:first-child{
+        margin-right: 40px;
+    }
+    .nav_pc li:last-child{
+        padding-right: 25px;
+    }
+}
+@media only screen and (max-width: 766px){
+    .nav_pc{
+        display: none;
+    }
+}
